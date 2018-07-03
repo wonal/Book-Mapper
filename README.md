@@ -2,7 +2,7 @@
 
 Oh the places you'll read.
 
-This is (will be) a web application designed to allow avid readers to generate a map of places they have traveled to in the books they have read.
+This is (will be) a web application designed to allow avid readers to generate a map of places they have traveled to via the books they have read.
 
 Planned Book-Mapper features include:
 - A lookup feature to find books and the respective locations where the narrative took place.

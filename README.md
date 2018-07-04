@@ -1,6 +1,6 @@
 # Book-Mapper
 
-Oh the places you'll read.
+Copyright (c) 2018 Allison Wong
 
 This is (will be) a web application designed to allow avid readers to generate a map of places they have traveled to via the books they have read.
 

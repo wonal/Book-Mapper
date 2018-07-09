@@ -14,6 +14,7 @@
 {-# LANGUAGE TypeFamilies #-}
 import Control.Applicative
 import Data.Text (Text)
+import System.IO
 import Yesod
 
 data BookMapper = BookMapper
@@ -52,7 +53,14 @@ getInputR = do
     book <- runInputGet $ Book
                <$> ireq textField "title"
                <*> ireq textField "location"
-    defaultLayout [whamlet|<p>#{show $ bookTitle book} set in #{show $ bookLocation book}|]
+    res <- liftIO $ appendFile "database.txt" ((show $ bookTitle book) ++ "," ++ (show $ bookLocation book) ++ "\n")
+    defaultLayout [whamlet|
+                      <p>#{show $ bookTitle book} set in #{show $ bookLocation book}
+                         <br>
+                         <br>
+                         <a href=@{HomeR}>Return
+                  |]
 
 main :: IO ()
 main = warp 3000 BookMapper
+

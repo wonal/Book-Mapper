@@ -16,12 +16,14 @@ import Control.Applicative
 import Data.Text (Text)
 import System.IO
 import Yesod
+import DatabaseUtils
 
 data BookMapper = BookMapper
 
 mkYesod "BookMapper" [parseRoutes|
 / HomeR GET
 /input InputR GET
+/test DatabaseR GET
 |]
 
 instance Yesod BookMapper
@@ -46,6 +48,8 @@ getHomeR = defaultLayout
                 <input type=text name=location>
                 to add to your map.
                 <input type=submit value="Add book">
+                <br>
+                <a href=@{DatabaseR}>Print Database
     |]
 
 getInputR :: Handler Html
@@ -53,12 +57,21 @@ getInputR = do
     book <- runInputGet $ Book
                <$> ireq textField "title"
                <*> ireq textField "location"
-    res <- liftIO $ appendFile "database.txt" ((show $ bookTitle book) ++ "," ++ (show $ bookLocation book) ++ "\n")
+    res <- liftIO $ appendFile "database.txt" (show (bookTitle book) ++ "%" ++ show (bookLocation book) ++ "\n")
+    --db  <- liftIO $ checkFile
     defaultLayout [whamlet|
                       <p>#{show $ bookTitle book} set in #{show $ bookLocation book}
                          <br>
                          <br>
                          <a href=@{HomeR}>Return
+                  |]
+getDatabaseR :: Handler Html
+getDatabaseR = do
+    db <- liftIO $ createDatabase
+    defaultLayout [whamlet|
+                      <p>#{show db}
+                      <br>
+                      <a href=@{HomeR}>Return
                   |]
 
 main :: IO ()

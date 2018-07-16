@@ -1,3 +1,4 @@
+-- Copyright (c) 2018 Allison Wong
 module DatabaseUtils where
 import qualified Data.Char as C
 import qualified Data.List as D 

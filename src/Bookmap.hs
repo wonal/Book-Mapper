@@ -12,6 +12,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
+module Bookmap where
 import Control.Applicative
 import Data.Text (Text)
 import System.IO
@@ -58,7 +59,6 @@ getInputR = do
                <$> ireq textField "title"
                <*> ireq textField "location"
     res <- liftIO $ appendFile "database.txt" (show (bookTitle book) ++ "%" ++ show (bookLocation book) ++ "\n")
-    --db  <- liftIO $ checkFile
     defaultLayout [whamlet|
                       <p>#{show $ bookTitle book} set in #{show $ bookLocation book}
                          <br>
@@ -74,6 +74,4 @@ getDatabaseR = do
                       <a href=@{HomeR}>Return
                   |]
 
-main :: IO ()
-main = warp 3000 BookMapper
 

@@ -1,7 +1,7 @@
 -- Copyright (c) 2018 Allison Wong
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
-module LatLngModel where
+module LatLngUtils where
 
 import Data.Aeson 
 import GHC.Generics
@@ -80,8 +80,8 @@ instance FromJSON Geometry where
 
 
 --TODO: handle (0.0,0.0), exceptions
-getLngLat :: String -> IO (Double, Double)
-getLngLat string = do
+getLatLng :: String -> IO (Double, Double)
+getLatLng string = do
     json <- (getJSON string)
     return $ case json of 
                   Nothing -> (0.0,0.0)

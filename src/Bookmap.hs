@@ -24,7 +24,7 @@ data BookMapper = BookMapper
 mkYesod "BookMapper" [parseRoutes|
 / HomeR GET
 /input InputR GET
-/test DatabaseR GET
+/database DatabaseR GET
 |]
 
 instance Yesod BookMapper
@@ -65,6 +65,7 @@ getInputR = do
                          <br>
                          <a href=@{HomeR}>Return
                   |]
+
 getDatabaseR :: Handler Html
 getDatabaseR = do
     db <- liftIO $ createDatabase

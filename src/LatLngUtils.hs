@@ -11,6 +11,8 @@ import Control.Applicative
 import Data.Aeson (decode) 
 import qualified Network.HTTP.Conduit as H
 
+type Coordinates = (Double, Double)
+
 data QueryResult = QueryResult
     {  results :: [Results]
     ,  status  :: T.Text
@@ -80,7 +82,7 @@ instance FromJSON Geometry where
 
 
 --TODO: handle (0.0,0.0), exceptions
-getLatLng :: String -> IO (Double, Double)
+getLatLng :: String -> IO Coordinates
 getLatLng string = do
     json <- (getJSON string)
     return $ case json of 

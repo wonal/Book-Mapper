@@ -4,6 +4,8 @@ Copyright (c) 2018 Allison Wong
 
 This is (will be) a web application designed to allow avid readers to generate a map of places they have traveled to via the books they have read.
 
+Status: [![Build Status](https://travis-ci.com/wonal/Book-Mapper.svg?branch=master)](https://travis-ci.com/wonal/Book-Mapper)
+
 Planned Book-Mapper features include:
 - A lookup feature to find books and the respective locations where the narrative took place.
 - An add feature to add a location for a particular book.

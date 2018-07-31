@@ -58,6 +58,7 @@ dependencies:
 - foreign-store
 - split
 - MissingH
+- hspec
 
 library:
   source-dirs: src

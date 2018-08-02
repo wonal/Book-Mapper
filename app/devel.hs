@@ -5,5 +5,10 @@
  -  the MIT license, and further information can be found at:
  -  https://opensource.org/licenses/MIT.  
  -}
-import Distribution.Simple
-main = defaultMain
+
+{-# LANGUAGE PackageImports #-}
+import "BookMapper" Application (develMain)
+import Prelude (IO)
+
+main :: IO ()
+main = develMain

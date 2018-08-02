@@ -1,0 +1,21 @@
+--  Copyright 2018 Allison Wong
+--  The code in this file was generated from the Yesod-Simple Stack template.
+--  More information can be found by the command: stack templates
+--  or consulting the Yesod book online.  The Yesod framework is licensed under
+--  the MIT license, and further information can be found at:
+--  https://opensource.org/licenses/MIT.  
+
+-- By default this file is used by `parseRoutesFile` in Foundation.hs
+-- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
+
+/static StaticR Static appStatic
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+-- / HomeR GET POST
+/ HomeR GET 
+/input InputR GET
+/database DatabaseR GET
+
+/comments CommentR POST

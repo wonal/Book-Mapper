@@ -14,8 +14,8 @@ import qualified LatLngUtils as LL
 -}
 
 type Title = String
-type Location = String
-type Database = [(Title, Location)]
+type Place = String
+type Database = [(Title, Place)]
 type CoordinatesDB = [(Title, [LL.Coordinates])]
 
 

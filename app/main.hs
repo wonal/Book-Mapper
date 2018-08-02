@@ -5,5 +5,8 @@
  -  the MIT license, and further information can be found at:
  -  https://opensource.org/licenses/MIT.  
  -}
-import Distribution.Simple
-main = defaultMain
+import Prelude     (IO)
+import Application (appMain)
+
+main :: IO ()
+main = appMain

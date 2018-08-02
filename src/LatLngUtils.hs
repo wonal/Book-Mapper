@@ -7,7 +7,7 @@ import Data.Aeson
 import GHC.Generics
 import qualified Data.Text as T
 import Control.Monad
-import Control.Applicative
+--import Control.Applicative
 import Data.Aeson (decode) 
 import qualified Network.HTTP.Conduit as H
 
@@ -84,8 +84,8 @@ instance FromJSON Geometry where
 --TODO: handle (0.0,0.0), exceptions
 getLatLng :: String -> IO Coordinates
 getLatLng string = do
-    json <- (getJSON string)
-    return $ case json of 
+    json_obj <- (getJSON string)
+    return $ case json_obj of 
                   Nothing -> (0.0,0.0)
                   Just x  -> (lat $ location $ geometry $ head $ results x, lng $ location $ geometry $ head $ results x)
 
@@ -94,9 +94,9 @@ getLatLng string = do
 here: https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
 under the Application: Rate exchange JSON API example." -}
 getJSON :: String -> IO (Maybe QueryResult)
-getJSON location = do
+getJSON place = do
     apiKey <- readApiKey
-    fmap decode $ H.simpleHttp $ "https://maps.googleapis.com/maps/api/geocode/json?address=" ++ location ++ "&key=" ++ apiKey
+    fmap decode $ H.simpleHttp $ "https://maps.googleapis.com/maps/api/geocode/json?address=" ++ place ++ "&key=" ++ apiKey
 
 
 readApiKey :: IO String

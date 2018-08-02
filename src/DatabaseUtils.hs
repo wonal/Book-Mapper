@@ -1,12 +1,12 @@
 -- Copyright (c) 2018 Allison Wong
 module DatabaseUtils where
 import qualified Data.Char as C
-import qualified Data.List as D 
+--import qualified Data.List as D 
 import qualified Data.HashMap.Strict as M 
 import qualified Data.List.Split as L
 import qualified Data.Set as S
 import qualified Data.String.Utils as U  
-import System.IO 
+--import System.IO 
 import qualified LatLngUtils as LL
 
 {- Assumes data stored in 'database.txt' is in format of "booktitle"%"booklocation"\n 

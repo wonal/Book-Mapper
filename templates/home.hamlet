@@ -1,0 +1,11 @@
+<!--Copyright 2018 Allison Wong -->
+   <form action=@{InputR}>
+       <p>
+           Enter the title
+           <input type=text name=title> 
+           and the location of the book
+           <input type=text name=location>
+           to add to your map.
+           <input type=submit value="Add book">
+           <br>
+           <a href=@{DatabaseR}>Print Database

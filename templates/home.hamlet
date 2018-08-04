@@ -9,3 +9,5 @@
            <input type=submit value="Add book">
            <br>
            <a href=@{DatabaseR}>Print Database
+           <br>
+           <a href=@{BookMapR}>See your map

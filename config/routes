@@ -17,5 +17,6 @@
 / HomeR GET 
 /input InputR GET
 /database DatabaseR GET
+/bookmap BookMapR GET
 
 /comments CommentR POST

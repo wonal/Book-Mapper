@@ -7,6 +7,7 @@
  -  the MIT license, where further information can be found at:
  -  https://opensource.org/licenses/MIT.  
  -}
+{-# QuasiQuotes #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
@@ -18,6 +19,7 @@ import Import
 --import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 --import Text.Julius (RawJS (..))
 import System.IO (appendFile)
+import qualified Data.HashMap.Strict as M
 
 data Book = Book 
     { bookTitle :: Text
@@ -39,13 +41,40 @@ getInputR = do
     defaultLayout $ do
         $(widgetFile "inputresult") 
 
+--createCoordinatesDB :: Database -> IO (M.HashMap String [LL.Coordinates])
 getDatabaseR :: Handler Html
 getDatabaseR = do
     db <- liftIO $ createDatabase
+    cdb <- liftIO $ createCoordinatesDB db
     defaultLayout $ do
        $(widgetFile "database")
 
+{-
+getBookMapR :: Handler Html
+getBookMapR = defaultLayout $ do
+    $(widgetFile "bookmap")
+-}
+
+getBookMapR :: Handler Html
+getBookMapR = defaultLayout $ do
+    setTitle "Book-Mapper"
+    $(widgetFile "bookmap")
+--
+
 {-}
+    [whamlet|
+           <div id=#{map}>
+       |]
+    toWidgetBody
+       [julius|function initMap() {
+         var lisbon = {lat: 38.7437, lng: -9.23024}
+         var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 1, center: lisbon});
+            var marker = new google.maps.Marker({position: lisbon, map: map});};
+       |]
+    toWidgetBody
+       [julius|google.maps.event.addDomListener(window, 'load', initMap);
+       |]
 -- Define our data that will be used for creating the form.
 data FileForm = FileForm
     { fileInfo :: FileInfo

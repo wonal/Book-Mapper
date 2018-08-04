@@ -4,14 +4,23 @@
      the code for which is licensed under the Apache 2.0 license. The full text of the license can be found at
      https://www.apache.org/licenses/LICENSE-2.0.  
 --> 
-<h3>Book Map   
+$doctype 5
+<html>
+   <head>
+      <style>
+         #map{
+            height: 700px;
+            width: 90%;
+         }
    <body>
-      <div id="map">
-      <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap">
-      <script>function initMap() {
-         var lisbon = {lat: 38.7437, lng: -9.23024}
-         var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 1, center: lisbon});
-            var marker = new google.maps.Marker({position: lisbon, map: map});};
+      <h3>Book Map   
+         <body>
+            <div id="map">
+            <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap">
+            <script>function initMap() {
+               var valencia = {lat: 39.40789, lng: -0.43172}
+               var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 2, center: valencia});
+                  var marker = new google.maps.Marker({position: valencia, map: map});};
 
 

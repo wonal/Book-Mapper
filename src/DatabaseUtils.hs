@@ -16,7 +16,7 @@ import qualified LatLngUtils as LL
 type Title = String
 type Place = String
 type Database = [(Title, Place)]
-type CoordinatesDB = [(Title, [LL.Coordinates])]
+type CoordinatesDB = [(Title, [LL.CoordinateObj])]
 
 
 createDatabase :: IO Database
@@ -33,7 +33,7 @@ parseFile contents = do
                      return unique_pairs
 
 
-createCoordinatesDB :: Database -> IO (M.HashMap String [LL.Coordinates])
+createCoordinatesDB :: Database -> IO (M.HashMap String [LL.CoordinateObj])
 createCoordinatesDB db = do
                          latlng <- mapM LL.getLatLng [snd entry | entry <- db] 
                          let formattedlatlng = map (:[]) latlng

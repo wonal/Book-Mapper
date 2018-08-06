@@ -13,6 +13,7 @@ import qualified Network.HTTP.Conduit as H
 
 type Coordinates = (Double, Double)
 
+
 data QueryResult = QueryResult
     {  results :: [Results]
     ,  status  :: T.Text
@@ -46,11 +47,10 @@ data Bounds = Bounds
     } deriving (Eq, Show, Generic)
 
 data Location = Location
-    {   lat :: Double
-    ,   lng :: Double
-    } deriving (Show, Eq, Generic)
+    {   latitude :: Double
+    ,   longitude :: Double
+    } deriving (Show, Eq)
 
-instance FromJSON Location
 instance FromJSON Bounds
 instance FromJSON QueryResult
 
@@ -62,7 +62,7 @@ instance FromJSON AddressComponents where
                           <$> v .:  "long_name" 
                           <*> v .:  "short_name" 
                           <*> v .:  "types"
-    parseJSON _ = mzero
+    parseJSON _    = fail "AddressComponents is an invalid type"
 
 instance FromJSON Results where
     parseJSON (Object v) = Results
@@ -72,6 +72,7 @@ instance FromJSON Results where
                           <*> v .:? "partial_match"
                           <*> v .:  "place_id"
                           <*> v .:  "types"
+    parseJSON _    = fail "Results is an invalid type"
 
 instance FromJSON Geometry where
     parseJSON (Object v) = Geometry
@@ -79,7 +80,13 @@ instance FromJSON Geometry where
                           <*> v .:  "location"
                           <*> v .:  "location_type"
                           <*> v .:  "viewport"
+    parseJSON _    = fail "Geometry is an invalid type"
 
+instance FromJSON Location where
+    parseJSON (Object v) = Location 
+                          <$> v .: "lat"
+                          <*> v .: "lng"
+    parseJSON _    = fail "Location is an invalid type"
 
 --TODO: handle (0.0,0.0), exceptions
 getLatLng :: String -> IO Coordinates
@@ -87,7 +94,7 @@ getLatLng string = do
     json_obj <- (getJSON string)
     return $ case json_obj of 
                   Nothing -> (0.0,0.0)
-                  Just x  -> (lat $ location $ geometry $ head $ results x, lng $ location $ geometry $ head $ results x)
+                  Just x  -> (latitude $ location $ geometry $ head $ results x, longitude $ location $ geometry $ head $ results x)
 
 
 {-} getJSON implemented with the help of a tutorial from the School of Haskell website on Parsing JSON with Aeson, found

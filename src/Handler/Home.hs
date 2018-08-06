@@ -7,7 +7,7 @@
  -  the MIT license, where further information can be found at:
  -  https://opensource.org/licenses/MIT.  
  -}
-{-# QuasiQuotes #-}
+--{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
@@ -32,6 +32,9 @@ getHomeR = defaultLayout $ do
     setTitle "Book-Mapper"
     $(widgetFile "home")
 
+--getBookMarkerR :: String -> Handler Value
+--getBookMarkerR bookName = --filter out coordinates for bookname title and then convert to json "Value" type
+
 getInputR :: Handler Html
 getInputR = do
     book <- runInputGet $ Book
@@ -41,19 +44,12 @@ getInputR = do
     defaultLayout $ do
         $(widgetFile "inputresult") 
 
---createCoordinatesDB :: Database -> IO (M.HashMap String [LL.Coordinates])
 getDatabaseR :: Handler Html
 getDatabaseR = do
     db <- liftIO $ createDatabase
     cdb <- liftIO $ createCoordinatesDB db
     defaultLayout $ do
        $(widgetFile "database")
-
-{-
-getBookMapR :: Handler Html
-getBookMapR = defaultLayout $ do
-    $(widgetFile "bookmap")
--}
 
 getBookMapR :: Handler Html
 getBookMapR = defaultLayout $ do

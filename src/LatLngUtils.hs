@@ -11,9 +11,11 @@ import Control.Monad
 import Data.Aeson (decode) 
 import qualified Network.HTTP.Conduit as H
 
---type Coordinates = (Double, Double)
+data CoordinateObject = CoordinateObject 
+    {  coordinates :: [Coordinate]
+    } deriving (Eq, Show, Generic)
 
-data CoordinateObj = CoordinateObj 
+data Coordinate = Coordinate 
     {  lat :: Double
     ,  lng :: Double 
     } deriving (Eq, Show, Generic)
@@ -57,7 +59,9 @@ data Location = Location
 
 instance FromJSON Bounds
 instance FromJSON QueryResult
-instance ToJSON CoordinateObj where 
+instance ToJSON Coordinate where 
+    toEncoding = genericToEncoding defaultOptions
+instance ToJSON CoordinateObject where
     toEncoding = genericToEncoding defaultOptions
 
 {-} The FromJSON instance methods below were implemented with the help of a School of Haskell tutorial 
@@ -95,12 +99,12 @@ instance FromJSON Location where
     parseJSON _    = fail "Location is an invalid type"
 
 --TODO: handle (0.0,0.0), exceptions
-getLatLng :: String -> IO CoordinateObj
+getLatLng :: String -> IO Coordinate
 getLatLng string = do
     json_obj <- (getJSON string)
     return $ case json_obj of 
-                  Nothing -> CoordinateObj {lat = 0.0, lng = 0.0}
-                  Just x  -> CoordinateObj {lat = latitude $ location $ geometry $ head $ results x, lng = longitude $ location $ geometry $ head $ results x}
+                  Nothing -> Coordinate {lat = 0.0, lng = 0.0}
+                  Just x  -> Coordinate {lat = latitude $ location $ geometry $ head $ results x, lng = longitude $ location $ geometry $ head $ results x}
 
 
 {-} getJSON implemented with the help of a tutorial from the School of Haskell website on Parsing JSON with Aeson, found

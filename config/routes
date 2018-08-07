@@ -13,10 +13,10 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
--- / HomeR GET POST
 / HomeR GET 
+/bookmarker/#String BookMarkerR GET
 /input InputR GET
 /database DatabaseR GET
-/bookmap BookMapR GET
+--/bookmap BookMapR GET
 
 /comments CommentR POST

@@ -8,7 +8,8 @@ import qualified Data.Set as S
 import qualified Data.String.Utils as U  
 --import System.IO 
 import qualified LatLngUtils as LL
-
+--import Data.Aeson (encode)
+--import qualified Data.ByteString.Lazy.Char8 as D
 {- Assumes data stored in 'database.txt' is in format of "booktitle"%"booklocation"\n 
  - or booktitle%booklocation\n
 -}
@@ -16,7 +17,7 @@ import qualified LatLngUtils as LL
 type Title = String
 type Place = String
 type Database = [(Title, Place)]
-type CoordinatesDB = [(Title, [LL.CoordinateObj])]
+type CoordinatesDB = [(Title, [LL.Coordinate])]
 
 
 createDatabase :: IO Database
@@ -33,7 +34,7 @@ parseFile contents = do
                      return unique_pairs
 
 
-createCoordinatesDB :: Database -> IO (M.HashMap String [LL.CoordinateObj])
+createCoordinatesDB :: Database -> IO (M.HashMap String [LL.Coordinate])
 createCoordinatesDB db = do
                          latlng <- mapM LL.getLatLng [snd entry | entry <- db] 
                          let formattedlatlng = map (:[]) latlng
@@ -41,5 +42,14 @@ createCoordinatesDB db = do
                          let cdb = M.fromListWith (++) titlecoords
                          return cdb
 
+retrieveCoordinates :: String -> M.HashMap String [LL.Coordinate] -> [LL.Coordinate]
+retrieveCoordinates key cdb = case M.lookup (map C.toLower key) cdb of
+                                   Nothing -> []
+                                   Just c  -> c
 
-
+-- main :: IO ()
+-- main = do
+--     db <- createDatabase 
+--     cdb <- createCoordinatesDB db
+--     let ccs = retrieveCoordinates "astoria" cdb 
+--     D.putStrLn $ encode $ LL.CoordinateObject ccs

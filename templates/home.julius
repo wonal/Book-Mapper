@@ -1,0 +1,20 @@
+// Copyright 2018 Allison Wong
+
+  $("form:first").submit(function(event) {
+    event.preventDefault();
+
+    var message = $("input:first").val();
+    console.log(message);
+    $.ajax({
+      url: '/bookmarker/'+message+'?title='+message,
+      type: 'GET',
+      contentType: "json",
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (data) {
+        console.log(data);
+      },
+    });
+
+  });

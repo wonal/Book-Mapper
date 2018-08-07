@@ -10,7 +10,14 @@ $doctype 5
    <body>
       <h3>Book Map   
          <body>
-            
+            <form>
+               <p>
+               Enter the title of the book 
+               <input type=text name=title> 
+               <input type=submit value="Add book to map">
+               <br>
+               <br>
+            <br> 
             <form action=@{InputR}>
                 <p>
                 Enter the title
@@ -26,9 +33,9 @@ $doctype 5
             <div id="map">
             <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap">
             <script>function initMap() {
-               var valencia = {lat: 39.40789, lng: -0.43172}
+               var valencia = {lat: 39.40789, lng: -0.43172};
                var map = new google.maps.Map(
                   document.getElementById('map'), {zoom: 2, center: valencia});
-                  var marker = new google.maps.Marker({position: valencia, map: map});}
+                  var marker = new google.maps.Marker({position: valencia, map: map});};
    
    

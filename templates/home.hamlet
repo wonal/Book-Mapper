@@ -31,11 +31,5 @@ $doctype 5
                 <br>
                 <br>
             <div id="map">
-            <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap">
-            <script>function initMap() {
-               var valencia = {lat: 39.40789, lng: -0.43172};
-               var map = new google.maps.Map(
-                  document.getElementById('map'), {zoom: 2, center: valencia});
-                  var marker = new google.maps.Marker({position: valencia, map: map});};
    
    

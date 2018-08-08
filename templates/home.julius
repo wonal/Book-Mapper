@@ -7,10 +7,13 @@ tag.src = 'https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initM
 var firstForm = document.getElementsByTagName('form')[0];
 firstForm.parentNode.insertBefore(tag, firstForm);
 
+var markers = new Array();
+var map;
+
 var last = document.createElement('script');
 last.innerHTML = "function initMap() {" + 
   "var valencia = {lat: 39.40789, lng: -0.43172};" +
-  "var map = new google.maps.Map(" +
+  "map = new google.maps.Map(" +
     "document.getElementById('map'), {zoom: 2, center: valencia});" +
     "var marker = new google.maps.Marker({position: valencia, map: map});};";
 document.body.appendChild(last);
@@ -26,6 +29,10 @@ $("form:first").submit(function(event) {
     contentType: "json",
     success: function (data) {
       console.log(data);
+      for (var i = 0; i < data.coordinates.length; i++){
+        markers.push(data.coordinates[i]);
+        var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
+      };
     },
     error: function (data) {
       console.log(data);

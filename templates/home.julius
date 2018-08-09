@@ -1,4 +1,5 @@
 // Copyright 2018 Allison Wong
+
 var tag = document.createElement('script');
 tag.type = 'text/javascript';
 tag.async = true;
@@ -10,17 +11,15 @@ firstForm.parentNode.insertBefore(tag, firstForm);
 var markers = new Array();
 var map;
 
-var last = document.createElement('script');
-last.innerHTML = "function initMap() {" + 
-  "var valencia = {lat: 39.40789, lng: -0.43172};" +
-  "map = new google.maps.Map(" +
-    "document.getElementById('map'), {zoom: 2, center: valencia});" +
-    "var marker = new google.maps.Marker({position: valencia, map: map});};";
-document.body.appendChild(last);
+function initMap() { 
+  var valencia = {lat: 39.40789, lng: -0.43172};
+  map = new google.maps.Map(
+    document.getElementById('map'), {zoom: 2, center: valencia});
+    var marker = new google.maps.Marker({position: valencia, map: map});
+};
 
 $("form:first").submit(function(event) {
   event.preventDefault();
-
   var message = $("input:first").val();
   console.log(message);
   $.ajax({
@@ -31,6 +30,9 @@ $("form:first").submit(function(event) {
       console.log(data);
       for (var i = 0; i < data.coordinates.length; i++){
         markers.push(data.coordinates[i]);
+        //help in realizing how to place markers onto the map rather than reload the map 
+        //came from this stack overflow post:
+        //https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api
         var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
       };
     },

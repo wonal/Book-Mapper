@@ -1,4 +1,19 @@
-// Copyright 2018 Allison Wong
+
+/* Copyright 2018 Allison Wong
+This program is licensed under the MIT license.  Full terms can be found at:
+https://github.com/wonal/Book-Mapper/blob/master/LICENSE.   Rendering the map and markers
+onto the page was implemented with the Google Maps Javascript API tutorial "Adding a 
+Google Map with a Marker to Your Website", found here:
+https://developers.google.com/maps/documentation/javascript/adding-a-google-map,
+the code for which is licensed under the Apache 2.0 License.  Terms can be found at:
+https://www.apache.org/licenses/LICENSE-2.0.
+Help in realizing how to place subsequent markers onto the map rather than reload the map 
+came from this stack overflow post:
+https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api.  
+Finally, how to add script tags via JS came from these two Stack Overflow posts:
+https://stackoverflow.com/questions/3408805/is-the-async-attribute-property-useful-if-a-script-is-dynamically-added-to-the
+https://stackoverflow.com/questions/41289602/add-defer-or-async-attribute-to-dynamically-generated-script-tags-via-javascript/41289721
+ */
 
 var tag = document.createElement('script');
 tag.type = 'text/javascript';
@@ -15,7 +30,6 @@ function initMap() {
   var valencia = {lat: 39.40789, lng: -0.43172};
   map = new google.maps.Map(
     document.getElementById('map'), {zoom: 2, center: valencia});
-    var marker = new google.maps.Marker({position: valencia, map: map});
 };
 
 $("form:first").submit(function(event) {
@@ -35,9 +49,6 @@ $("form:first").submit(function(event) {
         }
         else{
         markers.push(data.coordinates[i]);
-        //help in realizing how to place markers onto the map rather than reload the map 
-        //came from this stack overflow post:
-        //https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api
         var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
         }
       };

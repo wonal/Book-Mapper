@@ -1,4 +1,8 @@
--- Copyright (c) 2018 Allison Wong
+--  Copyright (c) 2018 Allison Wong
+--  This program is licensed under the MIT license.  Full terms can be found at:
+--  https://github.com/wonal/Book-Mapper/blob/master/LICENSE.
+  
+
 module DatabaseUtils where
 import qualified Data.Char as C
 --import qualified Data.List as D 
@@ -6,13 +10,9 @@ import qualified Data.HashMap.Strict as M
 import qualified Data.List.Split as L
 import qualified Data.Set as S
 import qualified Data.String.Utils as U  
---import System.IO 
 import qualified LatLngUtils as LL
 --import Data.Aeson (encode)
 --import qualified Data.ByteString.Lazy.Char8 as D
-{- Assumes data stored in 'database.txt' is in format of "booktitle"%"booklocation"\n 
- - or booktitle%booklocation\n
--}
 
 type Title = String
 type Place = String

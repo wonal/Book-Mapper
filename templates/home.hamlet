@@ -1,4 +1,15 @@
-<!--Copyright 2018 Allison Wong -->
+\<!-- Copyright 2018 Allison Wong
+This program is licensed under the MIT license.  Full terms can be found at:
+https://github.com/wonal/Book-Mapper/blob/master/LICENSE. Format for the page was 
+modified from the Google Maps Javascript API tutorial "Adding a 
+Google Map with a Marker to Your Website", found here:
+https://developers.google.com/maps/documentation/javascript/adding-a-google-map,
+the code for which is licensed under the Apache 2.0 License.  Terms can be found at:
+https://www.apache.org/licenses/LICENSE-2.0. The format for the page was also created with
+the help of the Yesod online book, found at https://www.yesodweb.com/book, 
+specifically the "Forms" chapter.  The Yesod book is licensed under the Creative Commons License, found at:
+https://creativecommons.org/licenses/by/4.0/, -->
+
 $doctype 5
 <html>
    <head>

@@ -1,4 +1,6 @@
 -- Copyright (c) 2018 Allison Wong
+-- This program is licensed under the MIT license.  Full terms can be found at:
+-- https://github.com/wonal/Book-Mapper/blob/master/LICENSE.
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 module LatLngUtils where
@@ -6,8 +8,6 @@ module LatLngUtils where
 import Data.Aeson 
 import GHC.Generics
 import qualified Data.Text as T
---import Control.Monad
---import Control.Applicative
 import Data.Aeson (decode) 
 import qualified Network.HTTP.Conduit as H
 

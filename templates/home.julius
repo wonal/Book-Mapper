@@ -28,16 +28,43 @@ $("form:first").submit(function(event) {
     contentType: "json",
     success: function (data) {
       console.log(data);
+      $("#result").html("");
       for (var i = 0; i < data.coordinates.length; i++){
+        if (data.coordinates[i].lat == 0.0 && data.coordinates[i].lng == 0.0){
+          $("#markerresult").html("The location was not valid for the book: " + message + " and the marker was not added.");
+        }
+        else{
         markers.push(data.coordinates[i]);
         //help in realizing how to place markers onto the map rather than reload the map 
         //came from this stack overflow post:
         //https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api
         var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
+        }
       };
     },
     error: function (data) {
       console.log(data);
+    },
+  });
+});
+
+$("form:last").submit(function(event) {
+  event.preventDefault();
+  var booktitle = $("[name=bookname]").val();
+  var loc = $("[name=location]").val();
+  console.log(booktitle);
+  console.log(loc);
+  $.ajax({
+    url: '/input/'+ booktitle + '/' + loc + '?btitle=' + booktitle + '&location=' + loc,
+    type: 'GET',
+    contentType: "text",
+    success: function (data) {
+      console.log(data);
+      $("#result").html(data);
+    },
+    error: function (data) {
+      console.log(data);
+      $("#result").html("There was a problem adding to the database.");
     },
   });
 

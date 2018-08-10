@@ -47,9 +47,10 @@ retrieveCoordinates key cdb = case M.lookup (map C.toLower key) cdb of
                                    Nothing -> []
                                    Just c  -> c
 
--- main :: IO ()
--- main = do
---     db <- createDatabase 
---     cdb <- createCoordinatesDB db
---     let ccs = retrieveCoordinates "astoria" cdb 
---     D.putStrLn $ encode $ LL.CoordinateObject ccs
+--main :: IO ()
+--main = do
+--    db <- createDatabase 
+--    cdb <- createCoordinatesDB db
+--    putStrLn (show cdb)
+    -- let ccs = retrieveCoordinates "astoria" cdb 
+    -- D.putStrLn $ encode $ LL.CoordinateObject ccs

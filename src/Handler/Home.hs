@@ -37,14 +37,16 @@ getBookMarkerR bookName = do
     cdb <- liftIO $ createCoordinatesDB db
     returnJson $ CoordinateObject (retrieveCoordinates bookName cdb)
 
-getInputR :: Handler Html
-getInputR = do
-    book <- runInputGet $ Book
-               <$> ireq textField "title"
-               <*> ireq textField "location"
-    res <- liftIO $ appendFile "database.txt" (show (bookTitle book) ++ "%" ++ show (bookLocation book) ++ "\n")
-    defaultLayout $ do
-        $(widgetFile "inputresult") 
+getInputR :: String -> String -> Handler String
+getInputR name setting = do
+    --book <- runInputGet $ Book
+    --           <$> ireq textField "bookname"
+    --           <*> ireq textField "location"
+    --liftIO $ appendFile "database.txt" (show (bookTitle book) ++ "%" ++ show (bookLocation book) ++ "\n")
+    --return $ show (bookTitle book) ++ " with a location of " ++ show (bookLocation book) ++ 
+    liftIO $ appendFile "database.txt" (name ++ "%" ++ setting ++ "\n")
+    return $ name ++ " with a location of " ++ setting ++ 
+             " has been added to the database.  Thanks!"
 
 getDatabaseR :: Handler Html
 getDatabaseR = do

@@ -15,7 +15,7 @@
 
 / HomeR GET 
 /bookmarker/#String BookMarkerR GET
-/input InputR GET
+/input/#String/#String InputR GET
 /database DatabaseR GET
 --/bookmap BookMapR GET
 

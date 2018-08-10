@@ -6,7 +6,7 @@ module LatLngUtils where
 import Data.Aeson 
 import GHC.Generics
 import qualified Data.Text as T
-import Control.Monad
+--import Control.Monad
 --import Control.Applicative
 import Data.Aeson (decode) 
 import qualified Network.HTTP.Conduit as H
@@ -98,13 +98,14 @@ instance FromJSON Location where
                           <*> v .: "lng"
     parseJSON _    = fail "Location is an invalid type"
 
---TODO: handle (0.0,0.0), exceptions
+
 getLatLng :: String -> IO Coordinate
 getLatLng string = do
     json_obj <- (getJSON string)
     return $ case json_obj of 
                   Nothing -> Coordinate {lat = 0.0, lng = 0.0}
-                  Just x  -> Coordinate {lat = latitude $ location $ geometry $ head $ results x, lng = longitude $ location $ geometry $ head $ results x}
+                  Just x  -> if (null $ results x) then Coordinate {lat = 0.0, lng = 0.0}
+                                                   else Coordinate {lat = latitude $ location $ geometry $ head $ results x, lng = longitude $ location $ geometry $ head $ results x}
 
 
 {-} getJSON implemented with the help of a tutorial from the School of Haskell website on Parsing JSON with Aeson, found

@@ -15,20 +15,22 @@ $doctype 5
                <input type=text name=title> 
                <input type=submit value="Add book to map">
                <br>
-               <br>
+            <div id="markerresult">
             <br> 
-            <form action=@{InputR}>
+            <form>
                 <p>
                 Enter the title
-                <input type=text name=title> 
+                <input type=text name=bookname> 
                 and the location of the book
                 <input type=text name=location>
                 to add to the database.
                 <input type=submit value="Add book">
                 <br>
+            <br>
+            <div id="result">
+            <br>
+            <p>
                 <a href=@{DatabaseR}>Print Database
-                <br>
-                <br>
             <div id="map">
    
    

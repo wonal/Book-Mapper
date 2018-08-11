@@ -10,38 +10,52 @@ the help of the Yesod online book, found at https://www.yesodweb.com/book,
 specifically the "Forms" chapter.  The Yesod book is licensed under the Creative Commons License, found at:
 https://creativecommons.org/licenses/by/4.0/, -->
 
-$doctype 5
-<html>
-   <head>
-      <style>
-         #map{
-            height: 700px;
-            width: 90%;
-         }
-   <body>
-      <h3>Book Map   
-            <form>
-               <p>
-               Enter the title of the book 
-               <input type=text name=title> 
-               <input type=submit value="Add book to map">
-               <br>
-            <div id="markerresult">
-            <br> 
-            <form>
-                <p>
-                Enter the title
-                <input type=text name=bookname> 
-                and the location of the book
-                <input type=text name=location>
-                to add to the database.
-                <input type=submit value="Add book">
-                <br>
-            <br>
-            <div id="result">
-            <br>
+<div .masthead>
+   <div .container>
+      <div .row>
+        <h1 .header>
+            Book-Mapper
+        <h2>
+            A visual representation of your literary travels
+
+<div .container>
+      <div .row>
+         <div .col>
+            <h1>Adding a Marker 
             <p>
-                <a href=@{DatabaseR}>Print Database
-            <div id="map">
+               Add a marker to your map by looking up a book.  If it is present in our database, a marker will be placed on your book map below.
+            <form>
+               <div class="form-row">
+                  <div class="form-group">
+                     <label for="inputTitle">Enter the title of the book
+                     <input type="text" class="form-control" id="inputTitle" name=title placeholder="Book Title"> 
+               <button type="submit" class="btn btn-primary">Add book to map
+            <div id="markerresult">
+    
+    <hr>
+
+      <div .row>
+         <div .col>
+            <h1>Adding a Book to the Database 
+            <p>
+               If a book is not present in the database, add it to our database, which will also help others in the future! 
+            <form>
+               <div class="form-row">
+                  <div class="form-group">
+                     <label for "booktitle">Enter the title of the book 
+                     <input type="text" name="bookname" class="form-control" id="booktitle" placeholder="Book Title">
+                  <div class="form-group">
+                     <label for "bookloc">Enter where the book takes place (ex. Paris, France)
+                     <input type="text" name="location" class="form-control" id="bookloc" placeholder="Book Location">
+               <button type="submit" class="btn btn-primary">Add book to database
+            <div id="result">
+
+    <hr>
+
+      <div .row>
+         <div .col>
+            <h1>Your Book Map 
+            <div id="map"> 
+
    
    

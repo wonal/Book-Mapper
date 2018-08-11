@@ -22,7 +22,7 @@ tag.defer = true;
 tag.src = 'https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap';
 var firstForm = document.getElementsByTagName('form')[0];
 firstForm.parentNode.insertBefore(tag, firstForm);
-
+//holds user's markers
 var markers = new Array();
 var map;
 

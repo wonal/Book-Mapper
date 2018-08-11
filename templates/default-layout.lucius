@@ -25,7 +25,7 @@ https://github.com/yesodweb/yesod/blob/master/LICENSE. */
     margin-top: -21px;
     color: white;
     text-align: center;
-    min-height: 500px;
+    min-height: 50px;
 }
 
 .masthead .header {
@@ -35,7 +35,6 @@ https://github.com/yesodweb/yesod/blob/master/LICENSE. */
 }
 
 .masthead h1.header {
-    margin-top: 1em;
     margin-bottom: 0em;
     font-size: 4.5em;
     line-height: 1.2em;
@@ -45,6 +44,7 @@ https://github.com/yesodweb/yesod/blob/master/LICENSE. */
 .masthead h2 {
     font-size: 1.7em;
     font-weight: normal;
+    margin-bottom: 40.5px;
 }
 
 .masthead .btn {
@@ -71,12 +71,10 @@ https://github.com/yesodweb/yesod/blob/master/LICENSE. */
 
 /* Space things out */
 .bs-docs-section {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 .bs-docs-section:last-child {
   margin-bottom: 0;
 }
 
-#message {
-    margin-bottom: 40px;
-}
+

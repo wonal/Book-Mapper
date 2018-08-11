@@ -1,0 +1,16 @@
+#map{
+   height: 700px;
+   width: 90%;
+}
+
+#inputTitle{
+    width:50%;
+}
+
+#booktitle{
+    width:50%;
+}
+
+#bookloc{
+    width:50%;
+}

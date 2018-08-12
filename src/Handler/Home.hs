@@ -34,8 +34,8 @@ getBookMarkerR bookName = do
 getInputR :: String -> String -> Handler String
 getInputR name setting = do
     liftIO $ appendFile "database.txt" (name ++ "%" ++ setting ++ "\n")
-    return $ name ++ " with a location of " ++ setting ++ 
-             " has been added to the database.  Thanks!"
+    return $ "'" ++ name ++ "' with a location of '" ++ setting ++ 
+             "' has been added to the database.  Thanks!"
 
 getDatabaseR :: Handler Html
 getDatabaseR = do

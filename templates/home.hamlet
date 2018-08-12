@@ -28,7 +28,7 @@ https://creativecommons.org/licenses/by/4.0/, -->
                <div class="form-row">
                   <div class="form-group">
                      <label for="inputTitle">Enter the title of the book
-                     <input type="text" class="form-control" id="inputTitle" name=title placeholder="Book Title"> 
+                     <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Book Title"> 
                <button type="submit" class="btn btn-primary">Add book to map
             <div id="markerresult">
     

@@ -34,27 +34,34 @@ function initMap() {
 
 $("form:first").submit(function(event) {
   event.preventDefault();
-  var message = $("input:first").val();
-  console.log(message);
+  var message = $("[name=title]").val();
   $.ajax({
     url: '/bookmarker/'+message+'?title='+message,
     type: 'GET',
     contentType: "json",
     success: function (data) {
-      console.log(data);
-      $("#result").html("");
-      for (var i = 0; i < data.coordinates.length; i++){
-        if (data.coordinates[i].lat == 0.0 && data.coordinates[i].lng == 0.0){
-          $("#markerresult").html("The location was not valid for the book: " + message + " and the marker was not added.");
-        }
-        else{
-        markers.push(data.coordinates[i]);
-        var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
-        }
-      };
+      $("#result").html("");    //clear out any messages for other form section
+      if(data.coordinates.length === 0){
+        $("#markerresult").html("Looks like '" + message + "' is not in our database yet.  Please consider adding it to our database below!");
+        $("[name=title]").val("");
+      }
+      else{
+         for (var i = 0; i < data.coordinates.length; i++){
+           if (data.coordinates[i].lat == 0.0 && data.coordinates[i].lng == 0.0){
+             $("#markerresult").html("A location was not valid for the book: '" + message + "' and a marker was not added.");
+           }
+           else{
+           $("[name=title]").val("");
+           markers.push(data.coordinates[i]);
+           var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
+           $("#markerresult").html("One or more markers have been added to your map.");
+           }
+         };
+      }
     },
     error: function (data) {
-      console.log(data);
+      $("#markerresult").html("Looks like there was an error.");
+      $("#result").html("");
     },
   });
 });
@@ -63,19 +70,19 @@ $("form:last").submit(function(event) {
   event.preventDefault();
   var booktitle = $("[name=bookname]").val();
   var loc = $("[name=location]").val();
-  console.log(booktitle);
-  console.log(loc);
   $.ajax({
     url: '/input/'+ booktitle + '/' + loc + '?btitle=' + booktitle + '&location=' + loc,
     type: 'GET',
     contentType: "text",
     success: function (data) {
-      console.log(data);
       $("#result").html(data);
+      $("#markerresult").html("");
+      $("[name=bookname]").val("");
+      $("[name=location]").val("");
     },
     error: function (data) {
-      console.log(data);
       $("#result").html("There was a problem adding to the database.");
+      $("#markerresult").html("");
     },
   });
 

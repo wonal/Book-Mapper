@@ -1,5 +1,0 @@
-<!--Copyright 2018 Allison Wong -->
-
-   <p>#{show cdb}
-   <br>
-   <a href=@{HomeR}>Return

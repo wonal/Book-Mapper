@@ -1,17 +1,8 @@
---  Copyright 2018 Allison Wong
---  This program is licensed under the MIT license.  Full terms can be found at:
---  https://github.com/wonal/Book-Mapper/blob/master/LICENSE.
---  The code in this file was generated from the Yesod-Simple Stack template and is not modified.
---  More information can be found by the command: stack templates
---  or consulting the Yesod book online.  The Yesod framework is licensed under
---  the MIT license, and further information can be found at:-
---  https://github.com/yesodweb/yesod/blob/master/LICENSE.  
---
 -- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 375449b929dbf712d9910ea7030c6c757bc75cc03c57caa0e1de134eb0fd24d4
+-- hash: b3f4f49d02957a320a38dd29c86b99b7064e2594ed7cb13036c39cc64e7fba2a
 
 name:           BookMapper
 version:        0.1.0.1
@@ -25,7 +16,6 @@ license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
 
 source-repository head
@@ -47,7 +37,6 @@ library
       Application
       DatabaseUtils
       Foundation
-      Handler.Comment
       Handler.Common
       Handler.Home
       Import

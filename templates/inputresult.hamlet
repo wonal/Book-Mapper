@@ -1,4 +1,0 @@
-   <p>#{show $ bookTitle book} set in #{show $ bookLocation book}
-      <br>
-      <br>
-      <a href=@{HomeR}>Return

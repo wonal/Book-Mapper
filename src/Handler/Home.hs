@@ -37,10 +37,4 @@ getInputR name setting = do
     return $ "'" ++ name ++ "' with a location of '" ++ setting ++ 
              "' has been added to the database.  Thanks!"
 
-getDatabaseR :: Handler Html
-getDatabaseR = do
-    db <- liftIO $ createDatabase
-    cdb <- liftIO $ createCoordinatesDB db
-    defaultLayout $ do
-       $(widgetFile "database")
 

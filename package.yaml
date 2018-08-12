@@ -16,7 +16,6 @@ copyright: "2018 Allison Wong"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 dependencies:
 

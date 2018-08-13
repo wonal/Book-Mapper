@@ -2,7 +2,8 @@
  -  This program is licensed under the MIT license.  Full terms can be found at:
  -  https://github.com/wonal/Book-Mapper/blob/master/LICENSE.
  -  The code in this file was generated from the Yesod-Simple Stack template, and the majority of 
- -  the code has not been modified -- only unnecessary handler modules have been removed.
+ -  the code has not been modified -- only unnecessary handler modules have been removed
+ -  and the functions 'appmain' and getApplicationDev' have been modified.
  -  More information can be found by the command: stack templates
  -  or consulting the Yesod book online.  The Yesod framework is licensed under
  -  the MIT license, and further information can be found at:
@@ -113,6 +114,9 @@ warpSettings foundation =
 -- | For yesod devel, return the Warp settings and WAI Application.
 getApplicationDev :: IO (Settings, Application)
 getApplicationDev = do
+    db <- createDatabase "Files/database.txt"
+    cdb <- createCoordinatesDB db
+    saveCoordinatesDB cdb "Files/saved-database.json"
     settings <- getAppSettings
     foundation <- makeFoundation settings
     wsettings <- getDevSettings $ warpSettings foundation
@@ -129,6 +133,10 @@ develMain = develMainHelper getApplicationDev
 -- | The @main@ function for an executable running this site.
 appMain :: IO ()
 appMain = do
+    db <- createDatabase "Files/database.txt"
+    cdb <- createCoordinatesDB db
+    saveCoordinatesDB cdb "Files/saved-database.json"
+
     -- Get the settings from all relevant sources
     settings <- loadYamlSettingsArgs
         -- fall back to compile-time values, set to [] to require values at runtime

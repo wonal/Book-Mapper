@@ -20,6 +20,15 @@ data Coordinate = Coordinate
     ,  lng :: Double 
     } deriving (Eq, Show, Generic)
 
+data CDB = CDB 
+    {  entries :: [BookInfo]
+    } deriving (Eq, Show, Generic)
+
+data BookInfo = BookInfo
+    {  title      :: T.Text
+    ,  locations  :: [Coordinate]
+    } deriving (Eq, Show, Generic)
+
 data QueryResult = QueryResult
     {  results :: [Results]
     ,  status  :: T.Text
@@ -59,8 +68,17 @@ data Location = Location
 
 instance FromJSON Bounds
 instance FromJSON QueryResult
+
+instance FromJSON Coordinate 
 instance ToJSON Coordinate where 
     toEncoding = genericToEncoding defaultOptions
+instance FromJSON CDB 
+instance ToJSON CDB where 
+    toEncoding = genericToEncoding defaultOptions
+instance FromJSON BookInfo 
+instance ToJSON BookInfo where 
+    toEncoding = genericToEncoding defaultOptions
+instance FromJSON CoordinateObject 
 instance ToJSON CoordinateObject where
     toEncoding = genericToEncoding defaultOptions
 

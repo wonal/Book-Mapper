@@ -27,13 +27,13 @@ getHomeR = defaultLayout $ do
 
 getBookMarkerR :: String -> Handler Value
 getBookMarkerR bookName = do
-    db <- liftIO $ createDatabase "database.txt"
+    db <- liftIO $ createDatabase "Files/database.txt"
     cdb <- liftIO $ createCoordinatesDB db
     returnJson $ CoordinateObject (retrieveCoordinates bookName cdb)
 
 getInputR :: String -> String -> Handler String
 getInputR name setting = do
-    liftIO $ appendFile "database.txt" (name ++ "%" ++ setting ++ "\n")
+    liftIO $ appendFile "Files/database.txt" (name ++ "%" ++ setting ++ "\n")
     return $ "'" ++ name ++ "' with a location of '" ++ setting ++ 
              "' has been added to the database.  Thanks!"
 

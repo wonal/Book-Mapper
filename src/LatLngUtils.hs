@@ -137,5 +137,5 @@ getJSON place = do
 
 readApiKey :: IO String
 readApiKey = do
-    contents <- readFile "APIkey.txt"
+    contents <- readFile "Files/APIkey.txt"
     return contents

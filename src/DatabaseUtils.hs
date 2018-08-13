@@ -71,10 +71,10 @@ decodeBytes bs = case decode bs of
 
 -- main :: IO ()
 -- main = do
---     db <- createDatabase "database.txt" 
+--     db <- createDatabase "Files/database.txt" 
 --     cdb <- createCoordinatesDB db
---     saveCoordinatesDB cdb "saved_database.json"
---     saved <- readCoordinatesDB "saved_database.json"
+--     saveCoordinatesDB cdb "Files/saved_database.json"
+--     saved <- readCoordinatesDB "Files/saved_database.json"
 --     putStrLn $ show saved
     -- let ccs = retrieveCoordinates "astoria" cdb 
     -- D.putStrLn $ encode $ LL.CoordinateObject ccs

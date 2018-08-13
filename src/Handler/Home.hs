@@ -27,7 +27,7 @@ getHomeR = defaultLayout $ do
 
 getBookMarkerR :: String -> Handler Value
 getBookMarkerR bookName = do
-    db <- liftIO $ createDatabase
+    db <- liftIO $ createDatabase "database.txt"
     cdb <- liftIO $ createCoordinatesDB db
     returnJson $ CoordinateObject (retrieveCoordinates bookName cdb)
 

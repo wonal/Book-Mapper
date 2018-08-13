@@ -20,9 +20,9 @@ type Database = [(Title, Place)]
 type CoordinatesDB = [(Title, [LL.Coordinate])]
 
 
-createDatabase :: IO Database
-createDatabase = do
-                 contents <- readFile "database.txt"
+createDatabase :: String -> IO Database
+createDatabase filename = do
+                 contents <- readFile filename 
                  if (not $ null contents) then do parseFile contents
                                           else return []
 
@@ -49,8 +49,8 @@ retrieveCoordinates key cdb = case M.lookup (map C.toLower key) cdb of
 
 --main :: IO ()
 --main = do
---    db <- createDatabase 
---    cdb <- createCoordinatesDB db
+--    db <- createDatabase "database.txt" 
+--    cdb <- createCoordinatesDB []
 --    putStrLn (show cdb)
     -- let ccs = retrieveCoordinates "astoria" cdb 
     -- D.putStrLn $ encode $ LL.CoordinateObject ccs

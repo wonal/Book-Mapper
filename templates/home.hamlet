@@ -1,14 +1,14 @@
 \<!-- Copyright 2018 Allison Wong
-This program is licensed under the MIT license.  Full terms can be found at:
+This project is licensed under the MIT license.  Full terms can be found at:
 https://github.com/wonal/Book-Mapper/blob/master/LICENSE. Format for the page was 
-modified from the Google Maps Javascript API tutorial "Adding a 
-Google Map with a Marker to Your Website", found here:
-https://developers.google.com/maps/documentation/javascript/adding-a-google-map,
-the code for which is licensed under the Apache 2.0 License.  Terms can be found at:
-https://www.apache.org/licenses/LICENSE-2.0. The format for the page was also created with
+modified from the Yesod-simple stack template, generated from the command: stack new <project name> yesod-simple.
+Bootstrap integration was followed from the 'homepage.hamlet' layout included in the template.  
+The Yesod framework is licensed under the MIT license, and further information can be found at:
+https://github.com/yesodweb/yesod/blob/master/LICENSE The format for the page was also created with
 the help of the Yesod online book, found at https://www.yesodweb.com/book, 
 specifically the "Forms" chapter.  The Yesod book is licensed under the Creative Commons License, found at:
 https://creativecommons.org/licenses/by/4.0/, -->
+
 
 <div .masthead>
    <div .container>

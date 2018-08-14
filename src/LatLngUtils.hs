@@ -29,6 +29,25 @@ data BookInfo = BookInfo
     ,  locations  :: [Coordinate]
     } deriving (Eq, Show, Generic)
 
+--derive FromJSON/ToJSON instances automatically 
+instance FromJSON Coordinate 
+instance ToJSON Coordinate where 
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON CDB 
+instance ToJSON CDB where 
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON BookInfo 
+instance ToJSON BookInfo where 
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON CoordinateObject 
+instance ToJSON CoordinateObject where
+    toEncoding = genericToEncoding defaultOptions
+
+
+--Below data types are for Google API call response
 data QueryResult = QueryResult
     {  results :: [Results]
     ,  status  :: T.Text
@@ -69,22 +88,14 @@ data Location = Location
 instance FromJSON Bounds
 instance FromJSON QueryResult
 
-instance FromJSON Coordinate 
-instance ToJSON Coordinate where 
-    toEncoding = genericToEncoding defaultOptions
-instance FromJSON CDB 
-instance ToJSON CDB where 
-    toEncoding = genericToEncoding defaultOptions
-instance FromJSON BookInfo 
-instance ToJSON BookInfo where 
-    toEncoding = genericToEncoding defaultOptions
-instance FromJSON CoordinateObject 
-instance ToJSON CoordinateObject where
-    toEncoding = genericToEncoding defaultOptions
 
-{-} The FromJSON instance methods below were implemented with the help of a School of Haskell tutorial 
-written by Alfredo DiNapoli, titled "Episode 1 - JSON", found here: 
-https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/episode-1-json" -}
+{-}
+ - Define my own instances of FromJSON for AddressComponents, Results, Geometry, and Location
+ - due to namespace conflicts, and maybe types. 
+ - The FromJSON instance methods below were implemented with the help of a School of Haskell tutorial 
+ - written by Alfredo DiNapoli, titled "Episode 1 - JSON", found here: 
+ - https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/episode-1-json"
+ -}
 instance FromJSON AddressComponents where
     parseJSON (Object v) = AddressComponents 
                           <$> v .:  "long_name" 
@@ -117,6 +128,7 @@ instance FromJSON Location where
     parseJSON _    = fail "Location is an invalid type"
 
 
+-- Given a book location, returns a pair of coordinates.  If the location is invalid, returns an invalid Coordinate.
 getLatLng :: String -> IO Coordinate
 getLatLng string = do
     json_obj <- (getJSON string)
@@ -126,12 +138,15 @@ getLatLng string = do
                                                    else Coordinate {lat = latitude $ location $ geometry $ head $ results x, lng = longitude $ location $ geometry $ head $ results x}
 
 
-{-} getJSON implemented with the help of a tutorial from the School of Haskell website on Parsing JSON with Aeson, found
-here: https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
-under the Application: Rate exchange JSON API example." -}
+{-} 
+ - getJSON implemented with the help of a tutorial from the School of Haskell website on Parsing JSON with Aeson, found
+ - here: https://www.schoolofhaskell.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json
+ - under the Application: Rate exchange JSON API example." 
+ -}
 getJSON :: String -> IO (Maybe QueryResult)
 getJSON place = do
     apiKey <- readApiKey
+    -- if on ubuntu machine, paste API key after "&key=" and remove '++ apiKey'
     fmap decode $ H.simpleHttp $ "https://maps.googleapis.com/maps/api/geocode/json?address=" ++ place ++ "&key=" ++ apiKey
 
 

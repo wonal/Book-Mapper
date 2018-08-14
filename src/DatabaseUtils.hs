@@ -20,6 +20,10 @@ type Database = [(Title, Place)]
 type CoordinatesDB = [(String, [LL.Coordinate])]
 
 
+{-}
+ - Creates a 'database' of book titles and their corresponding locations from 
+ - the textfile 'database.txt'.
+ -}
 createDatabase :: String -> IO Database 
 createDatabase filename = do
                  contents <- readFile filename 
@@ -35,6 +39,7 @@ parseFile contents = do
                      return unique_pairs
 
 
+-- Creates a coordinates database of book titles and the coordinate pairs of the book location(s).  
 createCoordinatesDB :: Database -> IO (M.HashMap String [LL.Coordinate])
 createCoordinatesDB db = do
                          latlng <- mapM LL.getLatLng [snd entry | entry <- db] 
@@ -44,12 +49,14 @@ createCoordinatesDB db = do
                          return cdb
 
 
+-- Returns a list of coordinate pairs for a book title key
 retrieveCoordinates :: String -> M.HashMap String [LL.Coordinate] -> [LL.Coordinate]
 retrieveCoordinates key cdb = case M.lookup (map C.toLower key) cdb of
                                    Nothing -> []
                                    Just c  -> c
 
 
+-- Saves a coordinate database to a file in json format
 saveCoordinatesDB :: M.HashMap String [LL.Coordinate] -> String -> IO ()
 saveCoordinatesDB coordinatesdb filename = do
                                            let list = M.toList coordinatesdb
@@ -57,6 +64,7 @@ saveCoordinatesDB coordinatesdb filename = do
                                            D.writeFile filename (encode jsonobj)
 
 
+-- Reads in a coordinate database from json format into a hashmap 
 readCoordinatesDB :: String -> IO (M.HashMap String [LL.Coordinate])
 readCoordinatesDB filename = do
                              bytes <- D.readFile filename 

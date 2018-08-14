@@ -37,6 +37,8 @@ before_install:
 - mkdir -p ~/.local/bin
 - export PATH=$HOME/.local/bin:$PATH
 - travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+- openssl aes-256-cbc -K $encrypted_03a325656f70_key -iv $encrypted_03a325656f70_iv -in APIkey.txt.enc -out APIkey.txt -d
+
 
 install:
 # Build dependencies

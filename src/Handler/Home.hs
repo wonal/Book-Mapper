@@ -19,6 +19,7 @@ module Handler.Home where
 import Import
 --import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 import System.IO (appendFile)
+import qualified Data.Char as C
 
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
@@ -34,8 +35,17 @@ getBookMarkerR bookName = do
 
 getInputR :: String -> String -> Handler String
 getInputR name setting = do
-    liftIO $ appendFile "Files/database.txt" (name ++ "%" ++ setting ++ "\n")
-    return $ "'" ++ name ++ "' with a location of '" ++ setting ++ 
+    coordinate <- liftIO $ getLatLng setting
+    cdb <- liftIO $ readCoordinatesDB "Files/saved-database.json"
+    let lowername = map C.toLower name
+    let latlngresults = retrieveCoordinates lowername cdb 
+    let message = "'" ++ name ++ "' with a location of '" ++ setting ++ 
              "' has been added to the database.  Thanks!"
+    if (coordinate `elem` latlngresults) then return message
+                                   else do
+                                        liftIO $ appendFile "Files/database.txt" (name ++ "%" ++ setting ++ "\n")
+                                        let updated = insertWith (++) lowername [coordinate] cdb 
+                                        liftIO $ saveCoordinatesDB updated "Files/saved-database.json"
+                                        return message
 
 

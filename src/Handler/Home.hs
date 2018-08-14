@@ -37,7 +37,7 @@ getHomeR = defaultLayout $ do
  -}
 getBookMarkerR :: String -> Handler Value
 getBookMarkerR bookName = do
-    cdb <- liftIO $ readCoordinatesDB "Files/saved-database.json"
+    cdb <- liftIO $ readCoordinatesDB cdbfile
     returnJson $ CoordinateObject (retrieveCoordinates bookName cdb)
 
 
@@ -50,16 +50,16 @@ getBookMarkerR bookName = do
 getInputR :: String -> String -> Handler String
 getInputR name setting = do
     coordinate <- liftIO $ getLatLng setting
-    cdb <- liftIO $ readCoordinatesDB "Files/saved-database.json"
+    cdb <- liftIO $ readCoordinatesDB cdbfile
     let lowername = map C.toLower name
     let latlngresults = retrieveCoordinates lowername cdb 
     let message = "'" ++ name ++ "' with a location of '" ++ setting ++ 
              "' has been added to the database.  Thanks!"
     if (coordinate `elem` latlngresults) then return message
                                    else do
-                                        liftIO $ appendFile "Files/database.txt" (name ++ "%" ++ setting ++ "\n")
+                                        liftIO $ appendFile databasefile (name ++ "%" ++ setting ++ "\n")
                                         let updated = insertWith (++) lowername [coordinate] cdb 
-                                        liftIO $ saveCoordinatesDB updated "Files/saved-database.json"
+                                        liftIO $ saveCoordinatesDB updated cdbfile
                                         return message
 
 

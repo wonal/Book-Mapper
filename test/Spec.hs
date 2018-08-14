@@ -13,7 +13,7 @@ import DatabaseUtils
 import qualified LatLngUtils as LL
 
 testfile :: String
-testfile = "Files/test-database.txt"
+testfile = "files/test-database.txt"
 
 main :: IO ()
 main = hspec $ do

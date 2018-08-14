@@ -14,3 +14,10 @@ import Foundation            as Import
 import Import.NoFoundation   as Import
 import DatabaseUtils         as Import
 import LatLngUtils           as Import
+
+
+databasefile :: String
+databasefile = "files/database.txt"
+
+cdbfile :: String
+cdbfile = "files/saved-database.json"

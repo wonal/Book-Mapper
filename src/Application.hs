@@ -115,9 +115,9 @@ warpSettings foundation =
 getApplicationDev :: IO (Settings, Application)
 getApplicationDev = do
     --added database creation and saving on startup
-    db <- createDatabase "Files/database.txt"
+    db <- createDatabase databasefile 
     cdb <- createCoordinatesDB db
-    saveCoordinatesDB cdb "Files/saved-database.json"
+    saveCoordinatesDB cdb cdbfile
     settings <- getAppSettings
     foundation <- makeFoundation settings
     wsettings <- getDevSettings $ warpSettings foundation
@@ -135,9 +135,9 @@ develMain = develMainHelper getApplicationDev
 appMain :: IO ()
 appMain = do
     --added database creation and saving on startup
-    db <- createDatabase "Files/database.txt"
+    db <- createDatabase databasefile 
     cdb <- createCoordinatesDB db
-    saveCoordinatesDB cdb "Files/saved-database.json"
+    saveCoordinatesDB cdb cdbfile
 
     -- Get the settings from all relevant sources
     settings <- loadYamlSettingsArgs

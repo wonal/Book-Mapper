@@ -146,11 +146,11 @@ getLatLng string = do
 getJSON :: String -> IO (Maybe QueryResult)
 getJSON place = do
     apiKey <- readApiKey
-    -- if on ubuntu machine, paste API key after "&key=" and remove '++ apiKey'
     fmap decode $ H.simpleHttp $ "https://maps.googleapis.com/maps/api/geocode/json?address=" ++ place ++ "&key=" ++ apiKey
 
 
+--for Ubuntu version.  For Windows, return contents only and add extra line to database.txt
 readApiKey :: IO String
 readApiKey = do
     contents <- readFile "APIkey.txt"
-    return contents
+    return $ take (length contents -1) contents

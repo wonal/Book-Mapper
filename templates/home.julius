@@ -24,8 +24,8 @@ tag.src = 'https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initM
 var firstForm = document.getElementsByTagName('form')[0];
 firstForm.parentNode.insertBefore(tag, firstForm);
 
-//holds user's markers
-var markers = new Array();
+var markers = new Array(); //holds user's markers
+var books = new Array();  //holds user's book titles
 var map;
 
 function initMap() { 
@@ -56,12 +56,13 @@ $("form:first").submit(function(event) {
       }
       else{
          for (var i = 0; i < data.coordinates.length; i++){
-           if (data.coordinates[i].lat == 0.0 && data.coordinates[i].lng == 0.0){
+           if (data.coordinates[i].lat === 0.0 && data.coordinates[i].lng === 0.0){
              $("#markerresult").html("A location was not valid for the book: '" + message + "' and a marker was not added.");
            }
            else{
            $("[name=title]").val("");
            markers.push(data.coordinates[i]);
+           books.push(message);
            var mark = new google.maps.Marker({position: data.coordinates[i], map: map});
            $("#markerresult").html("One or more markers have been added to your map.");
            }
@@ -77,19 +78,31 @@ $("form:first").submit(function(event) {
 
 
 /*
-When the user submits the second form, adding a book and location to the database, receives back a message that 
-is displayed to the page, confirming that it was added or that an error occurred.
+When the user submits the second form, adding a book and location to the database, and receives back a coordinate of 
+the location added.  If it's a valid coordinate, the user's books are checked to see if the map should be updated
+with this coordinate.  Otherwise, appropriate messages are displayed.
 */
 $("form:last").submit(function(event) {
   event.preventDefault();
   var booktitle = $("[name=bookname]").val();
   var loc = $("[name=location]").val();
   $.ajax({
-    url: '/input/'+ booktitle + '/' + loc + '?btitle=' + booktitle + '&location=' + loc,
+    url: '/input/'+ booktitle + '/' + loc + '?title=' + booktitle + '&location=' + loc,
     type: 'GET',
     contentType: "text",
     success: function (data) {
-      $("#result").html(data);
+      if(data.lat !== 0.0 && data.lng !== 0.0){  //if valid coordinate
+         if(($.inArray(booktitle, books) !== -1) && ($.inArray(data,markers)) === -1){  //if user has book on map but not this coordinate then update map
+           var mark = new google.maps.Marker({position: data, map: map});
+           $("#result").html("'" + booktitle + "' and '" + loc + "' have been added to the database and your map has been updated!");
+         }
+         else{
+           $("#result").html("'" + booktitle + "' and '" + loc + "' have been added to the database!");
+         }
+      }
+      else{
+         $("#result").html("Looks like '" + booktitle + "' and '" + loc + "' were already in the database!");
+      }
       $("#markerresult").html("");
       $("[name=bookname]").val("");
       $("[name=location]").val("");

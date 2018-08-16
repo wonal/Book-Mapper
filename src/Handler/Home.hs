@@ -47,19 +47,19 @@ getBookMarkerR bookName = do
  - adds it to the textfile and coordinate database before returning a string message
  - for confirmation. 
 -}
-getInputR :: String -> String -> Handler String
+getInputR :: String -> String -> Handler Value
 getInputR name setting = do
     coordinate <- liftIO $ getLatLng setting
     cdb <- liftIO $ readCoordinatesDB cdbfile
     let lowername = map C.toLower name
     let latlngresults = retrieveCoordinates lowername cdb 
-    let message = "'" ++ name ++ "' with a location of '" ++ setting ++ 
-             "' has been added to the database.  Thanks!"
-    if (coordinate `elem` latlngresults) then return message
-                                   else do
-                                        liftIO $ appendFile databasefile (name ++ "%" ++ setting ++ "\n")
-                                        let updated = insertWith (++) lowername [coordinate] cdb 
-                                        liftIO $ saveCoordinatesDB updated cdbfile
-                                        return message
+--    let message = "'" ++ name ++ "' with a location of '" ++ setting ++ 
+--             "' has been added to the database.  Thanks!"
+    if (coordinate `elem` latlngresults) then returnJson $ Coordinate (0.0) (0.0)
+                                         else do
+                                              liftIO $ appendFile databasefile (name ++ "%" ++ setting ++ "\n")
+                                              let updated = insertWith (++) lowername [coordinate] cdb 
+                                              liftIO $ saveCoordinatesDB updated cdbfile
+                                              returnJson coordinate
 
 

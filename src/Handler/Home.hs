@@ -44,8 +44,9 @@ getBookMarkerR bookName = do
 {-}
  - The handler for a GET request to the URL /input with query string of a book title and 
  - book location.  Checks to see if that pair already exists in the database, and if not
- - adds it to the textfile and coordinate database before returning a string message
- - for confirmation. 
+ - adds it to the textfile and coordinate database before returning a coordinate: invalid
+ - if the pair existed in the database, and otherwise the coordinate retrieved if not
+ - in the databse.
 -}
 getInputR :: String -> String -> Handler Value
 getInputR name setting = do
@@ -53,8 +54,6 @@ getInputR name setting = do
     cdb <- liftIO $ readCoordinatesDB cdbfile
     let lowername = map C.toLower name
     let latlngresults = retrieveCoordinates lowername cdb 
---    let message = "'" ++ name ++ "' with a location of '" ++ setting ++ 
---             "' has been added to the database.  Thanks!"
     if (coordinate `elem` latlngresults) then returnJson $ Coordinate (0.0) (0.0)
                                          else do
                                               liftIO $ appendFile databasefile (name ++ "%" ++ setting ++ "\n")

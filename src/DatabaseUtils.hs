@@ -77,12 +77,3 @@ decodeBytes bs = case decode bs of
                       Just x  -> M.fromListWith (++) [(unpack $ LL.title y, LL.locations y) | y <- LL.entries x]
 
 
--- main :: IO ()
--- main = do
---     db <- createDatabase "files/database.txt" 
---     cdb <- createCoordinatesDB db
---     saveCoordinatesDB cdb "files/saved_database.json"
---     saved <- readCoordinatesDB "files/saved_database.json"
---     putStrLn $ show saved
-    -- let ccs = retrieveCoordinates "astoria" cdb 
-    -- D.putStrLn $ encode $ LL.CoordinateObject ccs

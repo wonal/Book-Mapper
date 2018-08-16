@@ -28,12 +28,12 @@ There is still a lot I would like to do with this project: optimizations, improv
 If you don't already have Haskell Stack, install via the command: `curl -sSL https://get.haskellstack.org/ | sh`.
 If you get a warning about adding a path to the beginning of PATH in your profile, add 
 `export PATH="/home/user_name/.local/bin:$PATH"` to the end of your `.bashrc` file found at `~/.bashrc`.  Close and re-open your terminal.  
-Clone the repository: https://github.com/wonal/Book-Mapper.git .  Install the yesod command line tool inside the project directory: `stack install yesod-bin --install-ghc`. 
+Clone the repository: https://github.com/wonal/Book-Mapper.git .  Install the yesod command line tool inside the project directory: `stack install yesod-bin --install-ghc` (grab a cup of coffee, tea, beer, take a walk, etc.). 
 
 Obtain a Google Maps API key enabled for the Google Maps (Google Maps Javascript API) and Google Places (Google Geocoding API) services.  You can follow the steps [here](https://developers.google.com/maps/documentation/javascript/get-api-key).  Place the key in a text file
 titled "APIkey.txt" in the root directory (make sure to add it to your .gitignore file).  Paste your API key where instructed (`APIKEYHERE`) within the `templates/home.julius` file.    
 
-Run the command `stack build`.
+Run the command `stack build` (grab another cup of coffee, tea, beer, go on another walk, etc.).
 To run in development mode, run the command `stack exec -- yesod devel`.
 Access localhost:3000 in your browser.
 

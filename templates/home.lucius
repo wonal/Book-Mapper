@@ -7,6 +7,10 @@
  -  https://github.com/yesodweb/yesod/blob/master/LICENSE.  
  */
 
+#title1, #title2, #subtitle1, #subtitle2, #subtitle3, #container1, #container2{
+   font-family: 'Montserrat', sans-serif;
+}
+
 #map{
    height: 700px;
    width: 90%;

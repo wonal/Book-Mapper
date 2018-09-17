@@ -11,17 +11,17 @@ https://creativecommons.org/licenses/by/4.0/, -->
 
 
 <div .masthead>
-   <div .container>
+   <div .container id="container1">
       <div .row>
-        <h1 .header>
-            Book-Mapper
-        <h2>
+        <h1 .header id="title1">
+            BOOK-MAPPER
+        <h2 id="title2">
             A visual representation of your literary travels
 
-<div .container>
+<div .container id="container2">
       <div .row>
          <div .col>
-            <h1>Adding a Marker 
+            <h2 id="subtitle1">ADDING A MARKER
             <p>
                Add a marker to your map by looking up a book.  If it is present in our database, a marker will be placed on your book map below.
             <form>
@@ -36,7 +36,7 @@ https://creativecommons.org/licenses/by/4.0/, -->
 
       <div .row>
          <div .col>
-            <h1>Adding a Book to the Database 
+            <h2 id="subtitle2">ADDING A BOOK TO THE DATABASE
             <p>
                If a book is not present in the database, add it to our database, which will also help others in the future! 
             <form>
@@ -54,7 +54,7 @@ https://creativecommons.org/licenses/by/4.0/, -->
 
       <div .row>
          <div .col>
-            <h1>Your Book Map 
+            <h2 id="subtitle3">YOUR BOOK MAP
             <div id="map"> 
 
    

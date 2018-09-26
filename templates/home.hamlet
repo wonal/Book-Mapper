@@ -21,6 +21,20 @@ https://creativecommons.org/licenses/by/4.0/, -->
 <div .container id="container2">
       <div .row>
          <div .col>
+            <h2 id="subtitle1">WHAT IS THIS?
+            <p>
+               I love the idea that a book can take you to places.  Book-Mapper is based on that idea: you start off with a map and add books that you have read.  Markers are added that correspond to where the books have taken place, and so your book map represents where you have traveled to in a literary sense.  
+    <hr>
+
+      <div .row>
+         <div .col>
+            <h2 id="subtitle3">YOUR BOOK MAP
+            <div id="map"> 
+
+    <hr>
+
+      <div .row>
+         <div .col>
             <h2 id="subtitle1">ADDING A MARKER
             <p>
                Add a marker to your map by looking up a book.  If it is present in our database, a marker will be placed on your book map below.
@@ -54,8 +68,8 @@ https://creativecommons.org/licenses/by/4.0/, -->
 
       <div .row>
          <div .col>
-            <h2 id="subtitle3">YOUR BOOK MAP
-            <div id="map"> 
+            <h2 id="subtitle3">ABOUT THIS PROJECT
+            <p>This project was built using the Yesod Web Framework.  It is quite simplistic currently in terms of features.  To see the code for the project, report a bug, or see future plans for the next iterations of the project, visit the <a href="https://www.github.com/wonal/Book-Mapper">Github Page .
 
    
    

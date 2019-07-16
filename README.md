@@ -38,7 +38,7 @@ To run in development mode, run the command `stack exec -- yesod devel`.
 Access localhost:3000 in your browser.
 
 ### A Note About Development Mode
-I have been exclusively developing using development mode `stack exec -- yesod devel`.  To run in "production", the `stack build` command displays the path where the executable was placed.  Place that executable in a directory along with the `config` directory, the `files` directory, and the `APIkey.txt` file.  Start the server with the command `.\BookMapper`.  
+I have been exclusively developing using development mode `stack exec -- yesod devel`.  To run in "production", the `stack build` command displays the path where the executable was placed.  Place that executable in a directory along with the `config` directory, the `files` directory, the `static` directory, and the `APIkey.txt` file.  Start the server with the command `.\BookMapper` and access localhost:4321 in your browser.  
 
 ## Credits
 This project was built by me, Allison Wong, with a lot of help from the Yesod web framework, which is licensed under the [MIT license](https://github.com/yesodweb/yesod/blob/master/LICENSE).  The template I used for my web application was the 'yesod-simple' Stack template.  I used [Yesod's website](https://www.yesodweb.com) and [online book](https://www.yesodweb.com/book), many of their chapters which I read through numerous times to help create this web application.
